@@ -1,0 +1,24 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "jsx": "react-jsx", // 👈 automatic runtime
+    "jsxImportSource": "react", // 👈 ensures React 17+ JSX works
+    "declaration": true,
+    "emitDeclarationOnly": false,
+    "moduleResolution": "Bundler",
+    "skipLibCheck": true,
+    "strict": true,
+    "outDir": "dist",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts"
+  ]
+}
