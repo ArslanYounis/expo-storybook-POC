@@ -1,9 +1,10 @@
-import { Text, View } from "react-native";
+import { Button } from "dls_8";
+import { View } from "react-native";
 
 const Home = () => {
   return (
     <View>
-      <Text>Home</Text>
+      <Button label="ABC" primary />
     </View>
   );
 };

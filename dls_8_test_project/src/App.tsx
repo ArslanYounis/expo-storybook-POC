@@ -1,9 +1,11 @@
-// import { Button } from "dls_8";
+import { Button } from "dls_8";
 
 function App() {
   return (
     <>
-      <div>{/* <Button label="ABC" primary /> */}Hello</div>
+      <div style={{ width: "100%" }}>
+        <Button label="ABC" primary />
+      </div>
     </>
   );
 }
