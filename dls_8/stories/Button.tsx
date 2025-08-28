@@ -1,3 +1,4 @@
+import "../global.css";
 import type { StyleProp, ViewStyle } from "react-native";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
@@ -34,18 +35,10 @@ export const Button = ({
     <TouchableOpacity
       accessibilityRole="button"
       activeOpacity={0.6}
+      className="px-4 py-4 bg-blue-500 rounded-lg"
       onPress={onPress}
     >
-      <View
-        style={[
-          styles.button,
-          modeStyle,
-          sizeStyle,
-          style,
-          !!backgroundColor && { backgroundColor },
-          { borderColor: "black" },
-        ]}
-      >
+      <View className="px-4 py-4 bg-blue-500 rounded-lg">
         <Text style={[textModeStyle, textSizeStyle]}>{label}</Text>
       </View>
     </TouchableOpacity>

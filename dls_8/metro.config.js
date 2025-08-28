@@ -1,8 +1,13 @@
-// Learn more https://docs.expo.io/guides/customizing-metro
 const { getDefaultConfig } = require("expo/metro-config");
-const withStorybook = require("@storybook/react-native/metro/withStorybook");
+const { withNativeWind } = require("nativewind/metro");
+const { withStorybook } = require("@storybook/react-native/metro");
 
-/** @type {import('expo/metro-config').MetroConfig} */
-const config = getDefaultConfig(__dirname);
+let config = getDefaultConfig(__dirname);
 
-module.exports = withStorybook(config);
+// Ensure NativeWind transformer comes first
+config = withNativeWind(config, { input: "./global.css" });
+
+// Wrap Storybook last
+config = withStorybook(config);
+
+module.exports = config;
