@@ -1,5 +1,8 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import type { ButtonProps } from "./button.types";
+import { Portal } from "@gorhom/portal";
+import BottomSheet, { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
+import { useRef } from "react";
 
 export const Button = ({
   primary = false,
@@ -9,25 +12,56 @@ export const Button = ({
   style,
   onPress,
 }: ButtonProps) => {
+  const bottomSheetRef = useRef<BottomSheet>(null);
   const modeStyle = primary ? styles.primary : styles.secondary;
   const textModeStyle = primary ? styles.primaryText : styles.secondaryText;
   const sizeStyle = styles[size];
   const textSizeStyle = textSizeStyles[size];
 
   return (
-    <TouchableOpacity onPress={onPress}>
-      <View
-        style={[
-          styles.button,
-          modeStyle,
-          sizeStyle,
-          style,
-          !!backgroundColor && { backgroundColor },
-        ]}
+    <>
+      <TouchableOpacity
+        onPress={() => {
+          bottomSheetRef.current?.expand();
+        }}
       >
-        <Text style={[textModeStyle, textSizeStyle]}>{label}</Text>
-      </View>
-    </TouchableOpacity>
+        <View
+          style={[
+            styles.button,
+            modeStyle,
+            sizeStyle,
+            style,
+            !!backgroundColor && { backgroundColor },
+          ]}
+        >
+          <Text style={[textModeStyle, textSizeStyle]}>{label}</Text>
+        </View>
+      </TouchableOpacity>
+      <Portal>
+        <BottomSheet
+          keyboardBlurBehavior="restore"
+          handleIndicatorStyle={{ width: 100, backgroundColor: "#E3E3E3" }}
+          backdropComponent={(dropProps) => (
+            <BottomSheetBackdrop
+              {...dropProps}
+              appearsOnIndex={0}
+              disappearsOnIndex={-1}
+            />
+          )}
+          index={-1}
+          containerStyle={{
+            borderRadius: 0,
+          }}
+          ref={bottomSheetRef}
+          snapPoints={[120]}
+          enablePanDownToClose
+        >
+          <View style={{ flex: 1, alignItems: "center", paddingTop: 20 }}>
+            <Text>Awesome 🎉</Text>
+          </View>
+        </BottomSheet>
+      </Portal>
+    </>
   );
 };
 
